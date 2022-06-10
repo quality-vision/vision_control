@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: ./vision_control/Dockerfile
+    env_file:
+      - .env
+    environment:
+      - GIT_REVISION
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./vision_control:/backend
+    ports:
+      - 8000:8000

@@ -1,0 +1,12 @@
+[run]
+branch = True
+omit =
+    **/manage.py
+    **/__init__.py
+    **/urls.py
+    **/test_*.py
+    **/views.py
+    **/services.py
+    **/apps.py
+    **/admin.py
+    */vision_control/vision_control/*

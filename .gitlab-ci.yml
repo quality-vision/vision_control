@@ -1,0 +1,72 @@
+hooks:
+  image: python:3.10
+  before_script:
+    - pip install pre-commit
+  stage: .pre
+  script:
+    - pre-commit run --all-files
+
+test:
+  image: python:3.10
+  before_script:
+    - pip install poetry
+    - poetry config virtualenvs.create false
+    - poetry install
+  stage: test
+  script:
+    - python vision_control/manage.py makemigrations --settings=vision_control.settings.test
+    - python vision_control/manage.py migrate --settings=vision_control.settings.test
+    - cd vision_control
+    - pytest --junitxml=test.xml --cov=.
+    - coverage report
+    - coverage xml
+  coverage: '/TOTAL.*\s+(\d+%)$/'
+  artifacts:
+    when: always
+    reports:
+      junit: vision_control/test.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: vision_control/coverage.xml
+
+deploy:
+  image: alpine:latest
+  stage: deploy
+  before_script:
+    - apk update
+    - apk add git
+    - apk add openssh
+  script:
+    - chmod og= $ID_RSA
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $DEPLOYMENT_USER@$DEPLOYMENT_SERVER "cd $DEPLOYMENT_PATH; git fetch && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD); docker-compose build; export GIT_REVISION=$(git describe --always --tags); echo "Deploying $GIT_REVISION"; docker-compose up -d"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+
+pages:
+  stage: deploy
+  image: python:3.10-alpine
+  before_script:
+    - apk add graphviz git
+    - pip install mkdocs Markdown fontawesome-markdown mkdocs-graphviz mkdocs-macros-plugin
+  script:
+    - mkdocs build
+    - mkdir public
+    - cp -r site/* public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: on_success
+
+regression_test_report:
+  image: python:3.10
+  before_script:
+    - pip install python-gitlab click
+  stage: .post
+  script:
+    - python tools/scripts/test_fail_report.py $CI_PROJECT_ID $CI_PIPELINE_ID ernla111 --url $GITLAB_URL --private_token $GITLAB_ACCESS_TOKEN
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: always

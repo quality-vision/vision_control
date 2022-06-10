@@ -1,0 +1,77 @@
+[tool.poetry]
+name = 'vision_control'
+version = '0.0.1'
+description = ''
+authors = [
+    'Adam Sundberg <adasu264@student.liu.se>',
+    'Agnes Frost <agnfr874@student.liu.se>',
+    'Ernst Larson-Kapp <ernla111@student.liu.se>',
+    'Hugo Lundin <huglu829@student.liu.se>',
+    'Isak Granström <isagr354@student.liu.se>',
+    'Ivar Kamsvåg <ivaka037@student.liu.se>',
+    'Martin Hägglund <marha057@student.liu.se>',
+    'Robin Ekroth <robek274@student.liu.se>'
+]
+
+[tool.poetry.dependencies]
+python = '^3.10.1'
+django = '*'
+black = "^22.3.0"
+flake8 = "^4.0.1"
+gunicorn = "^20.1.0"
+click = "^8.1.2"
+python-logging-loki = "^0.3.1"
+websocket-client = "^1.2.3"
+colorama = "^0.4.4"
+djangorestframework = '*'
+pyment = "^0.3.3"
+textstat = "^0.7.3"
+django-environ = "^0.8.1"
+python-gitlab = "^3.3.0"
+pre-commit = "^2.18.1"
+colorlog = "^6.6.0"
+GitPython = "^3.1.27"
+freezegun = "^1.2.1"
+emoji = "^1.7.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = '*'
+poethepoet = "^0.13.1"
+pytest = "^7.1.1"
+pytest-django = "^4.5.2"
+pytest-cov = "^3.0.0"
+mkdocs = "^1.3.0"
+Markdown = "^3.3.7"
+mkdocs-graphviz = "^1.4.4"
+mkdocs-macros-plugin = "^0.7.0"
+fontawesome-markdown = "^0.2.6"
+
+[tool.poe.tasks]
+pre-commit = {shell = "pre-commit run --all-files"}
+mkdocs = {shell = "mkdocs serve -a localhost:5000"}
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "vision_control.settings.test"
+python_files = "tests.py test_*.py *_tests.py"
+
+[tool.black]
+include = '\.pyi?$'
+exclude = '''
+    /(
+        \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    )/
+    '''
+
+[tool.isort]
+profile="black"
+known_django="django"
+sections="DJANGO,FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+length_sort=true

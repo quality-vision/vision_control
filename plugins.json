@@ -1,0 +1,270 @@
+[
+    {
+        "name": "3D Globe Panel",
+        "id": "satellogic-3d-globe-panel"
+    },
+    {
+        "name": "ACE.SVG",
+        "id": "aceiot-svg-panel"
+    },
+    {
+        "name": "Alert list",
+        "id": "alertlist"
+    },
+    {
+        "name": "Annotations list",
+        "id": "annolist"
+    },
+    {
+        "name": "Azure Monitor",
+        "id": "grafana-azure-monitor-datasource"
+    },
+    {
+        "name": "Bar chart",
+        "id": "barchart"
+    },
+    {
+        "name": "Bar gauge",
+        "id": "bargauge"
+    },
+    {
+        "name": "Base64 Image/PDF",
+        "id": "volkovlabs-image-panel"
+    },
+    {
+        "name": "Blendstat",
+        "id": "farski-blendstat-panel"
+    },
+    {
+        "name": "Cal-HeatMap",
+        "id": "neocat-cal-heatmap-panel"
+    },
+    {
+        "name": "Calendar",
+        "id": "marcusolsson-calendar-panel"
+    },
+    {
+        "name": "Candlestick",
+        "id": "candlestick"
+    },
+    {
+        "name": "Carpet plot",
+        "id": "petrslavotinek-carpetplot-panel"
+    },
+    {
+        "name": "Chaos Mesh",
+        "id": "yeya24-chaosmesh-datasource"
+    },
+    {
+        "name": "Clock",
+        "id": "grafana-clock-panel"
+    },
+    {
+        "name": "CloudWatch",
+        "id": "cloudwatch"
+    },
+    {
+        "name": "Colored SVG Panel",
+        "id": "snuids-svg-panel"
+    },
+    {
+        "name": "Dashboard list",
+        "id": "dashlist"
+    },
+    {
+        "name": "Diagram",
+        "id": "jdbranham-diagram-panel"
+    },
+    {
+        "name": "Dynamic image panel",
+        "id": "dalvany-image-panel"
+    },
+    {
+        "name": "Elasticsearch",
+        "id": "elasticsearch"
+    },
+    {
+        "name": "Gantt",
+        "id": "marcusolsson-gantt-panel"
+    },
+    {
+        "name": "Gauge",
+        "id": "gauge"
+    },
+    {
+        "name": "Geomap",
+        "id": "geomap"
+    },
+    {
+        "name": "Getting Started",
+        "id": "gettingstarted"
+    },
+    {
+        "name": "Google Cloud Monitoring",
+        "id": "stackdriver"
+    },
+    {
+        "name": "Graph (old)",
+        "id": "graph"
+    },
+    {
+        "name": "Graphite",
+        "id": "graphite"
+    },
+    {
+        "name": "Heatmap",
+        "id": "heatmap"
+    },
+    {
+        "name": "Heatmap",
+        "id": "savantly-heatmap-panel"
+    },
+    {
+        "name": "Histogram",
+        "id": "mtanda-histogram-panel"
+    },
+    {
+        "name": "Histogram",
+        "id": "histogram"
+    },
+    {
+        "name": "Hourly heatmap",
+        "id": "marcusolsson-hourly-heatmap-panel"
+    },
+    {
+        "name": "InfluxDB",
+        "id": "influxdb"
+    },
+    {
+        "name": "JSON",
+        "id": "simpod-json-datasource"
+    },
+    {
+        "name": "JSON API",
+        "id": "marcusolsson-json-datasource"
+    },
+    {
+        "name": "Jaeger",
+        "id": "jaeger"
+    },
+    {
+        "name": "Logs",
+        "id": "logs"
+    },
+    {
+        "name": "Loki",
+        "id": "loki"
+    },
+    {
+        "name": "Microsoft SQL Server",
+        "id": "mssql"
+    },
+    {
+        "name": "MySQL",
+        "id": "mysql"
+    },
+    {
+        "name": "News",
+        "id": "news"
+    },
+    {
+        "name": "Node Graph",
+        "id": "nodeGraph"
+    },
+    {
+        "name": "OpenTSDB",
+        "id": "opentsdb"
+    },
+    {
+        "name": "PictureIt",
+        "id": "bessler-pictureit-panel"
+    },
+    {
+        "name": "Pie chart",
+        "id": "piechart"
+    },
+    {
+        "name": "Plugin list",
+        "id": "pluginlist"
+    },
+    {
+        "name": "PostgreSQL",
+        "id": "postgres"
+    },
+    {
+        "name": "Prometheus",
+        "id": "prometheus"
+    },
+    {
+        "name": "Sentry",
+        "id": "grafana-sentry-datasource"
+    },
+    {
+        "name": "Singlestat Math",
+        "id": "blackmirror1-singlestat-math-panel"
+    },
+    {
+        "name": "Stat",
+        "id": "stat"
+    },
+    {
+        "name": "State timeline",
+        "id": "state-timeline"
+    },
+    {
+        "name": "Static",
+        "id": "marcusolsson-static-datasource"
+    },
+    {
+        "name": "Status Panel",
+        "id": "vonage-status-panel"
+    },
+    {
+        "name": "Status history",
+        "id": "status-history"
+    },
+    {
+        "name": "Table",
+        "id": "table"
+    },
+    {
+        "name": "Table (old)",
+        "id": "table-old"
+    },
+    {
+        "name": "Tempo",
+        "id": "tempo"
+    },
+    {
+        "name": "TestData DB",
+        "id": "testdata"
+    },
+    {
+        "name": "Text",
+        "id": "text"
+    },
+    {
+        "name": "Time series",
+        "id": "timeseries"
+    },
+    {
+        "name": "Traffic Lights",
+        "id": "snuids-trafficlights-panel"
+    },
+    {
+        "name": "Treemap",
+        "id": "marcusolsson-treemap-panel"
+    },
+    {
+        "name": "Waterfall Panel",
+        "id": "auxmoney-waterfall-panel"
+    },
+    {
+        "name": "Welcome",
+        "id": "welcome"
+    },
+    {
+        "name": "Zipkin",
+        "id": "zipkin"
+    }
+]

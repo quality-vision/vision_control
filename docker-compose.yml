@@ -1,0 +1,112 @@
+version: '3.9'
+
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy
+      - CADDY_DOCKER_CADDYFILE_PATH=/Caddyfile
+    networks:
+      - caddy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+      - ./tools/config/Caddyfile:/Caddyfile
+    restart: unless-stopped
+
+  middleware:
+    build:
+      context: .
+      dockerfile: ./vision_control/Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - GIT_REVISION
+    volumes:
+      - ./vision_control:/backend
+    command: >
+      sh -c "python manage.py migrate &&
+             DJANGO_SETTINGS_MODULE=vision_control.settings.production gunicorn vision_control.wsgi:application --bind 0.0.0.0:8000"
+    networks:
+      - caddy
+    labels:
+      caddy: <url>
+      caddy.reverse_proxy: "{{upstreams 8000}}"
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./tools/config/loki/:/etc/loki/
+    command: -config.file=/etc/loki/config.yaml
+    networks:
+      - caddy
+    labels:
+      caddy: <url>
+      caddy.reverse_proxy: "{{upstreams 3100}}"
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - "GF_SECURITY_ADMIN_USER=hugo"
+      - "GF_SECURITY_ADMIN_PASSWORD=RyRTvH6ADsN9u4rMKeQDLxTm"
+      - "GF_INSTALL_PLUGINS=grafana-clock-panel,marcusolsson-json-datasource,grafana-sentry-datasource"
+    ports:
+      - '3000:3000'
+    links:
+      - loki
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./tools/config/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./tools/config/grafana/dashboards/:/var/lib/grafana/dashboards/
+    depends_on:
+      - loki
+    networks:
+      - caddy
+    labels:
+      caddy: <url>
+      caddy.reverse_proxy: "{{upstreams 3000}}"
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./tools/config/prometheus/:/etc/prometheus/
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention=200h'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    networks:
+      - caddy
+    labels:
+      caddy: <url>
+      caddy.reverse_proxy: "{{upstreams 9090}}"
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
+
+networks:
+  caddy:
+    external: true
+
+volumes:
+    caddy_data:
+        external: true
+        name: config_caddy_data
+    grafana_data:
+        external: true
+        name: config_grafana_data
+    prometheus_data:
+        external: true
+        name: config_prometheus_data

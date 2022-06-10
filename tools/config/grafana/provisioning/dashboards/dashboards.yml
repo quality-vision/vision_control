@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: 'Kandidatgrupp 13'
+    folder: ''
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+      # <bool> use folder names from filesystem to create folders in Grafana
+      foldersFromFilesStructure: true

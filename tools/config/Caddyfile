@@ -1,0 +1,27 @@
+loki.<url> {
+    basicauth /* {
+        admin password
+    }
+
+    header X-Scope-OrgID internal
+
+    reverse_proxy
+}
+
+prometheus.<url> {
+    basicauth /* {
+        admin password
+    }
+
+    header X-Scope-OrgID internal
+
+    reverse_proxy
+}
+
+middleware.<url> {
+    basicauth /api/* {
+        admin password
+    }
+
+    reverse_proxy
+}

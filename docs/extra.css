@@ -1,0 +1,49 @@
+/* Sidebar header (and topbar for mobile) */
+.wy-side-nav-search, .wy-nav-top {
+    background-color: rgb(78, 141, 225);
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption {
+    color: #78b0fb;
+}
+
+div.admonition.note p.admonition-title {
+    background-color: rgba(78, 141, 225, 1);
+}
+
+div.admonition.note {
+    background-color: rgba(78, 141, 225, 0.05);
+}
+
+div.admonition.tips p.admonition-title {
+    background-color: rgba(40, 167, 69, 1);
+}
+
+div.admonition.tips {
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+div.admonition.warning p.admonition-title {
+    background-color: rgb(255, 192, 8);
+}
+
+div.admonition.warning {
+    background-color:rgba(255, 192, 8, 0.05);
+}
+
+.not-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+details > p {
+    background-color: #f5f5f5;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}

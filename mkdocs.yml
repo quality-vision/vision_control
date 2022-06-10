@@ -1,0 +1,35 @@
+site_name: Vision Control
+site_url: https://kandidatgrupp-13.gitlab-pages.liu.se/dashboard-for-gitlab-and-sentrydata/
+
+theme:
+  name: readthedocs
+  highlightjs: true
+
+markdown_extensions:
+    - admonition
+    - footnotes
+    - fontawesome_markdown
+    - mkdocs_graphviz:
+        light_theme: 000000
+        dark_theme: 000000
+        color: 000000
+        bgcolor: none
+        graph_color: 000000
+        graph_fontcolor: 000000
+        node_color: 000000
+        node_fontcolor: 000000
+        edge_color: 000000
+        edge_fontcolor: 000000
+
+
+plugins:
+  - search
+  - macros:
+      module_name: macros
+      verbose: false
+
+extra_css:
+  - extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/gh/rod2ik/cdn@main/mkdocs/javascripts/mkdocs-graphviz.js
